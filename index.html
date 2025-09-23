@@ -69,43 +69,82 @@
     
     /* Estilos responsivos para móviles */
     @media (max-width: 768px) {
-      .MUSICA .contenido {
+      section#MUSICA .contenido {
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         padding: 20px !important;
         gap: 30px !important;
       }
-      .MUSICA .contenido:first-child {
+      section#MUSICA .contenido:first-child {
+        text-align: center !important;
+        padding: 60px 20px 20px 20px !important;
         margin-top: 0 !important;
-        padding-top: 40px !important;
       }
-      .MUSICA .contenido:last-child {
-        padding-top: 3cm !important;
-        margin-top: 40px !important;
+      section#MUSICA .contenido:last-child {
+        padding-top: 8cm !important;
+        margin-top: 0 !important;
+      }
+      section#MUSICA .contenido[style*="margin-top: -2cm"] {
+        margin-top: 0 !important;
       }
       .disco {
         width: 100% !important;
         max-width: 280px !important;
-        margin: 0 auto !important;
+        margin: 0 auto 10px auto !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
       }
+
       .disco img {
-        margin: 0 auto !important;
-      }
-      .MUSICA .contenido:first-child {
-        text-align: center !important;
-        padding: 40px 20px !important;
-        margin-top: 0 !important;
+        margin: 0 auto 0.4cm auto !important;
       }
       #mis-lanzamientos {
         margin: 0 !important;
         padding: 0 !important;
+        width: 100% !important;
       }
       .QUIÉNSOY .texto {
         padding-top: 2cm !important;
+      }
+      section#MUSICA div[style*="text-align: center"][style*="padding: 40px 20px"] {
+        padding-bottom: 80px !important;
+        margin-bottom: -1cm !important;
+      }
+      section.PARTITURAS {
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+      }
+      section.PARTITURAS .contenido {
+        margin: 0 !important;
+        padding: 20px !important;
+        padding-bottom: 120px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      section.PARTITURAS ul {
+        padding-bottom: 100px !important;
+      }
+      .QUIÉNSOY .imagenes {
+        margin-top: 1cm !important;
+        gap: 70px !important;
+        padding-bottom: 120px !important;
+      }
+      .portada-texto h1 {
+        margin-top: 11cm !important;
+      }
+      .portada-texto h2#subtitulo {
+        margin-top: 0.2cm !important;
+      }
+      .iconos-redes {
+        margin-top: 7.9cm !important;
+      }
+      .portada-texto {
+        margin-top: -0.5cm !important;
       }
     }
   </style>

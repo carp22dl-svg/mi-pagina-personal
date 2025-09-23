@@ -1,0 +1,427 @@
+/* === ESTILO GENERAL === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+  position: relative;
+}
+
+
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+/* === SECCIÓN PORTADA === */
+.portada {
+  position: relative;
+  text-align: center;
+  background: white;
+  z-index: 1;
+}
+
+.portada-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  object-position: center 50%;
+  max-height: 150vh;
+}
+
+.portada-texto {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(214, 205, 205, 0.8);
+  text-shadow: 2px 2px 10px rgba(46, 45, 45, 0.4);
+}
+
+.portada-texto h1 {
+  font-size: 4em;
+  margin: 0;
+  line-height: 1;
+}
+
+.portada-texto h2 {
+  font-size: 2em;
+  font-weight: normal;
+  margin: 0;
+  line-height: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* === ÍCONOS DE REDES EN LA PORTADA === */
+.iconos-redes {
+  position: absolute;
+  top: -39%; /* respeta tu diseño */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 80px;
+  z-index: 10;
+}
+
+.iconos-redes a img {
+  width: 40px; /* valor definido por vos */
+  height: auto;
+  transition: filter 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+}
+
+.iconos-redes a:hover img {
+  transform: scale(2.6);
+}
+
+@media (max-width: 768px) {
+  .iconos-redes {
+    top: -25%;
+    gap: 40px;
+  }
+}
+
+/* === NAVBAR === */
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  z-index: 100;
+  border-bottom-left-radius: 10px;
+  margin: 0;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar li a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-weight: bold;
+  font-size: 1em;
+  transition: color 0.3s ease;
+}
+
+.navbar li a:hover {
+  color: #b2ebf2;
+}
+
+/* === SECCIÓN PRESENTACIÓN === */
+.QUIÉNSOY {
+  padding: 50px 20px;
+  color: #f5f5dc;
+  background-image: url('imagenes/fondoquiensoy.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.QUIÉNSOY .subseccion {
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.QUIÉNSOY .contenido {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: nowrap;
+}
+
+.QUIÉNSOY .texto {
+  max-width: 600px;
+  flex-shrink: 0;
+}
+
+.QUIÉNSOY .texto h2 {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.QUIÉNSOY .texto h2.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: bounceIn 1s forwards;
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes slideIn {
+  0% { transform: translateY(-40px); }
+  100% { transform: translateY(0); }
+}
+
+
+
+@keyframes bounceInRight {
+  0% { opacity: 0; transform: translateX(60px) scale(0.8); }
+  60% { opacity: 1; transform: translateX(-10px) scale(1.05); }
+  80% { transform: translateX(4px) scale(0.97); }
+  100% { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+.MUSICA .texto h2 {
+  opacity: 0;
+  transform: translateX(60px) scale(0.95);
+  transition: opacity 0.7s, transform 0.7s;
+  margin-top: 60px;
+  margin-left: -570px;
+  color: #f5f5dc;
+}
+
+.MUSICA .texto h2.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  animation: bounceInRight 0.7s;
+}
+
+
+
+.QUIÉNSOY .imagenes {
+  display: flex;
+  flex-direction: column;
+  gap: 160px;
+  margin-top: 160px;
+}
+
+.QUIÉNSOY .imagenes img {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgb(0, 0, 0);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.QUIÉNSOY .imagenes img:hover {
+  transform: scale(1.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* === SECCIÓN MÚSICA === */
+.MUSICA {
+  padding: 0;
+  margin: -100px 0 0 0;
+  min-height: calc(150vh + 100px);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-image: url('imagenes/fondomusica.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.MUSICA .contenido {
+  width: 100%;
+  padding: 140px 40px 40px 100px;
+  margin: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.MUSICA img {
+  width: 150%;
+  height: auto;
+  display: block;
+  margin-top: 10px;
+}
+
+.MUSICA .discos li > div:first-child {
+  margin-bottom: 0px;
+  text-align: center;
+  margin-right: 140px;
+  font-size: 1.4em;
+  color: white;
+}
+
+.MUSICA .discos li > div:nth-child(2) {
+  margin-top: 0px;
+}
+
+.MUSICA .discos li {
+  gap: 5px !important;
+}
+
+.MUSICA .discos img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.MUSICA .discos img:hover {
+  transform: scale(1.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+/* === SECCIÓN PARTITURAS === */
+.PARTITURAS {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.PARTITURAS h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.PARTITURAS ul {
+  list-style: none;
+  padding: 0;
+}
+
+.PARTITURAS li {
+  margin: 10px 0;
+}
+
+.PARTITURAS a {
+  color: #088286;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.PARTITURAS a:hover {
+  text-decoration: underline;
+}
+
+/* === FOOTER CONTACTO === */
+footer {
+  padding: 30px 20px;
+  background-color: #0d1113;
+  color: white;
+  text-align: center;
+}
+
+footer h3 {
+  margin-bottom: 15px;
+}
+
+.redes {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  margin-bottom: 15px;
+}
+
+.redes li a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.redes li a:hover {
+  color: #b2ebf2;
+}
+
+footer a {
+  color: #b2ebf2;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* === CONTROL DE VISIBILIDAD POR SECCIONES === */
+.seccion {
+  display: block;
+  scroll-margin-top: 60px; /* navbar fija */
+}
+
+.seccion.visible {
+  display: block;
+}
+
+.MUSICA .disco img {
+  margin-left: 100px;
+}
+
+/* === SECCIÓN PARTITURAS === */
+.PARTITURAS {
+  padding: 50px 20px;
+  color: #f5f5dc;
+}
+
+.PARTITURAS .texto h2 {
+  opacity: 0;
+  transform: translateX(60px) scale(0.95);
+  transition: opacity 0.7s, transform 0.7s;
+  color: #f5f5dc;
+}
+
+.PARTITURAS .texto h2.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  animation: bounceInRight 0.7s;
+}
+
+/* === ICONOS DE REDES EN SECCIÓN MÚSICA === */
+.MUSICA .disco div a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.MUSICA .disco div a img {
+  margin-left: 0;
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.MUSICA .disco div a:hover img {
+  transform: scale(2.2);
+}
+
+/* === EFECTO HOVER PARA IMÁGENES DE DISCOS === */
+.MUSICA .disco > img {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.MUSICA .disco > img:hover {
+  transform: scale(1.7);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}

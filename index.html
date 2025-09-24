@@ -31,6 +31,24 @@
     .social-link:hover {
       transform: scale(1.2);
     }
+    .language-switcher {
+      display: flex;
+      gap: 5px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid #f5f5f5;
+      color: #f5f5f5;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      background: #f5f5f5;
+      color: #000;
+    }
   </style>
   <script src="script.js"></script>
   <style>
@@ -156,17 +174,51 @@
       section.MUSICA p[style*="margin: 50px auto 0 auto"] {
         padding-bottom: 120px !important;
       }
+      section.portada div[style*="bottom: calc(10px + 6.8cm)"] {
+        bottom: 12.5cm !important;
+        font-size: 10px !important;
+      }
+      section.portada div[style*="left: calc(20px + 2cm)"] {
+        bottom: calc(10px + 2.4cm) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        font-size: 10px !important;
+      }
+      footer iframe {
+        width: 70% !important;
+        height: 150px !important;
+        max-width: 250px !important;
+      }
+      .navbar ul {
+        font-size: 10px !important;
+        gap: 8px !important;
+        justify-content: center !important;
+      }
+      .navbar ul li a {
+        padding: 8px 6px !important;
+        font-size: 10px !important;
+      }
+      .lang-btn {
+        padding: 4px 6px !important;
+        font-size: 9px !important;
+      }
+      .language-switcher {
+        gap: 3px !important;
+      }
     }
   </style>
 </head>
 <body>
   <nav class="navbar">
     <ul>
-      <li><a href="#INICIO">INICIO</a></li>
-      <li><a href="#QUIENSOY">QUIÉN SOY</a></li>
-      <li><a href="#MUSICA">MÚSICA</a></li>
-      <li><a href="#PARTITURAS">PARTITURAS</a></li>
-
+      <li><a href="#INICIO" data-translate="nav-inicio">INICIO</a></li>
+      <li><a href="#QUIENSOY" data-translate="nav-quiensoy">QUIÉN SOY</a></li>
+      <li><a href="#MUSICA" data-translate="nav-musica">MÚSICA</a></li>
+      <li><a href="#PARTITURAS" data-translate="nav-partituras">PARTITURAS</a></li>
+      <li class="language-switcher">
+        <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn active">ES</button>
+        <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+      </li>
     </ul>
   </nav>
 
@@ -186,7 +238,7 @@
         </a>
       </div>
       <h1 style="margin-top: -1cm;">Leo Chaura</h1>
-      <h2 id="subtitulo">Músico</h2>
+      <h2 id="subtitulo" data-translate="subtitulo">Músico</h2>
     </div>
     
     <!-- CONTACTO -->
@@ -194,15 +246,15 @@
       <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; max-width: 1200px; margin: 0 auto;">
         <div style="flex: 1; min-width: 300px; text-align: center;">
           <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">
-            <h2 style="color: #d4af37; font-family: 'Georgia', serif; margin: 0; font-size: 1.5em;">CONTACTO</h2>
+            <h2 data-translate="contacto" style="color: #d4af37; font-family: 'Georgia', serif; margin: 0; font-size: 1.5em;">CONTACTO</h2>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="#d4af37" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
           </div>
           <p style="color: white; margin: 10px 0;"><a href="mailto:leochauramusico@gmail.com" class="social-link" style="color: #d4af37; text-decoration: none;">leochauramusico@gmail.com</a></p>
           <div style="margin-top: 20px;">
-            <a href="https://www.facebook.com/leochaura/?locale=es_LA" target="_blank" class="social-link" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Facebook</a>
-            <a href="https://www.instagram.com/leochaura/" target="_blank" class="social-link" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Instagram</a>
+            <a href="https://www.facebook.com/leochaura/?locale=es_LA" target="_blank" class="social-link" data-translate="facebook" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Facebook</a>
+            <a href="https://www.instagram.com/leochaura/" target="_blank" class="social-link" data-translate="instagram" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Instagram</a>
           </div>
         </div>
         <div style="flex: 1; min-width: 300px; max-width: 400px;">
@@ -210,25 +262,33 @@
         </div>
       </div>
     </footer>
+    
+    <!-- PIE DE PÁGINA -->
+    <div style="position: absolute; bottom: 10px; left: calc(20px + 2cm); color: #888; font-size: 12px; font-family: 'Georgia', serif;">
+      <span data-translate="copyright">© 2025 Leo Chaura | Diseño y Desarrollo</span>
+    </div>
+    <div style="position: absolute; bottom: calc(10px + 6.8cm); right: 20px; color: #888; font-size: 12px; font-family: 'Georgia', serif;">
+      Ph MechiFuz
+    </div>
   </section>
 
   <!-- QUIÉN SOY -->
   <section id="QUIENSOY" class="QUIÉNSOY seccion">
     <div class="contenido" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; justify-content: center;">
       <div class="texto" style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
-        <h2 id="sobre-mi">Sobre mí</h2>
-        <p>Leonardo Chaura (Buenos Aires, 1988) es un guitarrista, arreglador y compositor con un profundo enfoque en la fusión de la música clásica, el folklore y el tango. Su carrera, marcada por la curiosidad y la intuición, es un viaje de exploración sonora que lo ha llevado por distintos géneros, escenarios y países.</p>
-        <h3 class="subseccion">Inicios y Formación</h3>
-        <p>A los 9 años, Leo comenzó sus estudios en el Conservatorio de Música Alberto Ginastera bajo la guía del reconocido guitarrista clásico Carlos Magnano. Esta formación temprana le permitió desarrollar una sonoridad atenta y un dominio técnico que pronto aplicaría a otras tradiciones. Paralelamente, se sumergió en la música folklórica argentina, tocando en ballets y asumiendo el rol de primera guitarra. Fue una etapa de asombro y descubrimiento, navegando entre los mundos de Bach y Los Chalchaleros, de Tárrega y Atahualpa Yupanqui.</p>
-        <p>A los 18 años, decidió profundizar en la música popular argentina, estudiando en la Academia Nacional del Tango con el maestro Aníbal Arias, una figura que fue decisiva en su recorrido técnico y expresivo. Continuó su formación en armonía, orquestación y contrapunto con diversos maestros, demostrando un compromiso constante con el desarrollo de su lenguaje musical.</p>
-        <h3 class="subseccion">Los Sueños y la Gestión</h3>
-        <p>Con los años, su actividad profesional como músico sesionista y acompañante se consolidó en escenarios, teatros y espacios culturales de Argentina. Durante una gira, se estableció por dos años en Medellín, Colombia, donde gestionó y participó en numerosas propuestas artísticas.</p>
-        <p>En Colombia, fue co-fundador y gestor de La Tanguería Parrilla y Tango, un icónico resto que se convirtió en un referente del tango en el país. Esta experiencia demostró su visión integral del negocio, desde la curaduría de la grilla musical hasta la gestión operativa. Sus presentaciones en el "X y XI Festival Internacional de Tango Medellín", en colaboración con músicos locales, fueron especialmente destacadas, incluyendo la producción y los arreglos para la fusión de géneros en la clausura.</p>
-        <p>A su regreso a Buenos Aires, fue cofundador y gestor del ciclo La Cucha del Gotan junto a Santiago Cisnero y participó activamente en la fundación y gestión de diversas milongas y espacios culturales, demostrando su capacidad de liderazgo y organización en el circuito cultural de Buenos Aires.</p>
-        <p>A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.</p>
-        <h3 class="subseccion">Un Vuelo Constante</h3>
-        <p>Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).</p>
-        <p>Se desempeña como guitarrista solista con su último EP, <em>Con Vos, Guitarra</em> (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.</p>
+        <h2 id="sobre-mi" data-translate="sobre-mi">Sobre mí</h2>
+        <p data-translate="bio-intro">Leonardo Chaura (Buenos Aires, Argentina, 1988) es un guitarrista, arreglador y compositor con un profundo enfoque en la fusión de la música clásica, el folklore y el tango. Su carrera, marcada por la curiosidad y la intuición, es un viaje de exploración sonora que lo ha llevado por distintos géneros, escenarios y países.</p>
+        <h3 class="subseccion" data-translate="inicios-formacion">Inicios y Formación</h3>
+        <p data-translate="bio-formacion1">A los 9 años, Leo comenzó sus estudios en el Conservatorio de Música Alberto Ginastera bajo la guía del reconocido guitarrista clásico Carlos Magnano. Esta formación temprana le permitió desarrollar una sonoridad atenta y un dominio técnico que pronto aplicaría a otras tradiciones. Paralelamente, se sumergió en la música folklórica argentina, tocando en ballets y asumiendo el rol de primera guitarra. Fue una etapa de asombro y descubrimiento, navegando entre los mundos de Bach y Los Chalchaleros, de Tárrega y Atahualpa Yupanqui.</p>
+        <p data-translate="bio-formacion2">A los 18 años, decidió profundizar en la música popular argentina, estudiando en la Academia Nacional del Tango con el maestro Aníbal Arias, una figura que fue decisiva en su recorrido técnico y expresivo. Continuó su formación en armonía, orquestación y contrapunto con diversos maestros, demostrando un compromiso constante con el desarrollo de su lenguaje musical.</p>
+        <h3 class="subseccion" data-translate="suenos-gestion">Los Sueños y la Gestión</h3>
+        <p data-translate="bio-gestion1">Con los años, su actividad profesional como músico sesionista y acompañante se consolidó en escenarios, teatros y espacios culturales de Argentina. Durante una gira, se estableció por dos años en Medellín, Colombia, donde gestionó y participó en numerosas propuestas artísticas.</p>
+        <p data-translate="bio-gestion2">En Colombia, fue co-fundador y gestor de La Tanguería Parrilla y Tango, un icónico resto que se convirtió en un referente del tango en el país. Esta experiencia demostró su visión integral del negocio, desde la curaduría de la grilla musical hasta la gestión operativa. Sus presentaciones en el "X y XI Festival Internacional de Tango Medellín", en colaboración con músicos locales, fueron especialmente destacadas, incluyendo la producción y los arreglos para la fusión de géneros en la clausura.</p>
+        <p data-translate="bio-gestion3">A su regreso a Buenos Aires, fue cofundador y gestor del ciclo La Cucha del Gotan junto a Santiago Cisnero y participó activamente en la fundación y gestión de diversas milongas y espacios culturales, demostrando su capacidad de liderazgo y organización en el circuito cultural de Buenos Aires.</p>
+        <p data-translate="bio-gestion4">A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.</p>
+        <h3 class="subseccion" data-translate="vuelo-constante">Un Vuelo Constante</h3>
+        <p data-translate="bio-vuelo1">Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).</p>
+        <p data-translate="bio-vuelo2">Se desempeña como guitarrista solista con su último EP, <em>Con Vos, Guitarra</em> (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.</p>
       </div>
       <div class="imagenes" style="flex: 1 1 250px; min-width: 220px; max-width: 400px; display: flex; flex-direction: column; gap: 100px; align-items: center;">
         <img src="imagenes/tocando.jpg" alt="tocando" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite;">
@@ -242,7 +302,7 @@
   <section class="MUSICA seccion" id="MUSICA">
     <div class="contenido" style="margin-top: -2cm;">
       <div class="texto">
-        <h2 id="mis-lanzamientos">Mis últimos lanzamientos!</h2>
+        <h2 id="mis-lanzamientos" data-translate="mis-lanzamientos">Mis últimos lanzamientos!</h2>
       </div>
     </div>
     <div class="contenido" style="margin-top: -2cm;">
@@ -279,7 +339,7 @@
 
     
     <!-- CITA -->
-    <p style="font-style: italic; color: #d4af37; font-size: 18px; max-width: 800px; margin: 50px auto 0 auto; line-height: 1.6; font-family: 'Georgia', serif; text-align: center;">
+    <p data-translate="cita-bartok" style="font-style: italic; color: #d4af37; font-size: 18px; max-width: 800px; margin: 50px auto 0 auto; line-height: 1.6; font-family: 'Georgia', serif; text-align: center;">
       "Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók
     </p>
   </section>
@@ -288,7 +348,7 @@
   <section class="PARTITURAS seccion" id="PARTITURAS" style="background-image: url('imagenes/fondopartituras.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;">
     <div class="contenido">
       <div class="texto">
-        <h2 id="partituras-titulo" style="padding-top: 2cm; text-align: center;">Descargá algunos de mis arreglos en PDF!</h2>
+        <h2 id="partituras-titulo" data-translate="partituras-titulo" style="padding-top: 2cm; text-align: center;">Descargá algunos de mis arreglos en PDF!</h2>
       </div>
     </div>
     <div class="contenido" style="padding-top: 3cm;">
@@ -325,6 +385,84 @@
     window.addEventListener('hashchange', mostrarSeccion);
     window.addEventListener('DOMContentLoaded', mostrarSeccion);
   </script>
+  
+  <script>
+    const translations = {
+      es: {
+        'nav-inicio': 'INICIO',
+        'nav-quiensoy': 'QUIÉN SOY',
+        'nav-musica': 'MÚSICA',
+        'nav-partituras': 'PARTITURAS',
+        'subtitulo': 'Músico',
+        'sobre-mi': 'Sobre mí',
+        'mis-lanzamientos': 'Mis últimos lanzamientos!',
+        'inicios-formacion': 'Inicios y Formación',
+        'suenos-gestion': 'Los Sueños y la Gestión',
+        'vuelo-constante': 'Un Vuelo Constante',
+        'bio-intro': 'Leonardo Chaura (Buenos Aires, Argentina, 1988) es un guitarrista, arreglador y compositor con un profundo enfoque en la fusión de la música clásica, el folklore y el tango. Su carrera, marcada por la curiosidad y la intuición, es un viaje de exploración sonora que lo ha llevado por distintos géneros, escenarios y países.',
+        'bio-formacion1': 'A los 9 años, Leo comenzó sus estudios en el Conservatorio de Música Alberto Ginastera bajo la guía del reconocido guitarrista clásico Carlos Magnano. Esta formación temprana le permitió desarrollar una sonoridad atenta y un dominio técnico que pronto aplicaría a otras tradiciones. Paralelamente, se sumergió en la música folklórica argentina, tocando en ballets y asumiendo el rol de primera guitarra. Fue una etapa de asombro y descubrimiento, navegando entre los mundos de Bach y Los Chalchaleros, de Tárrega y Atahualpa Yupanqui.',
+        'bio-formacion2': 'A los 18 años, decidió profundizar en la música popular argentina, estudiando en la Academia Nacional del Tango con el maestro Aníbal Arias, una figura que fue decisiva en su recorrido técnico y expresivo. Continuó su formación en armonía, orquestación y contrapunto con diversos maestros, demostrando un compromiso constante con el desarrollo de su lenguaje musical.',
+        'bio-gestion1': 'Con los años, su actividad profesional como músico sesionista y acompañante se consolidó en escenarios, teatros y espacios culturales de Argentina. Durante una gira, se estableció por dos años en Medellín, Colombia, donde gestionó y participó en numerosas propuestas artísticas.',
+        'bio-gestion2': 'En Colombia, fue co-fundador y gestor de La Tanguería Parrilla y Tango, un icónico resto que se convirtió en un referente del tango en el país. Esta experiencia demostró su visión integral del negocio, desde la curaduría de la grilla musical hasta la gestión operativa. Sus presentaciones en el "X y XI Festival Internacional de Tango Medellín", en colaboración con músicos locales, fueron especialmente destacadas, incluyendo la producción y los arreglos para la fusión de géneros en la clausura.',
+        'bio-gestion3': 'A su regreso a Buenos Aires, fue cofundador y gestor del ciclo La Cucha del Gotan junto a Santiago Cisnero y participó activamente en la fundación y gestión de diversas milongas y espacios culturales, demostrando su capacidad de liderazgo y organización en el circuito cultural de Buenos Aires.',
+        'bio-gestion4': 'A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.',
+        'bio-vuelo1': 'Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).',
+        'bio-vuelo2': 'Se desempeña como guitarrista solista con su último EP, Con Vos, Guitarra (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.',
+        'partituras-titulo': 'Descargá algunos de mis arreglos en PDF!',
+        'cita-bartok': '"Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók',
+        'contacto': 'CONTACTO',
+        'facebook': 'Facebook',
+        'instagram': 'Instagram',
+        'copyright': '© 2025 Leo Chaura | Diseño y Desarrollo'
+      },
+      en: {
+        'nav-inicio': 'HOME',
+        'nav-quiensoy': 'ABOUT ME',
+        'nav-musica': 'MUSIC',
+        'nav-partituras': 'SHEET MUSIC',
+        'subtitulo': 'Musician',
+        'sobre-mi': 'About me',
+        'mis-lanzamientos': 'My latest releases!',
+        'inicios-formacion': 'Beginnings and Training',
+        'suenos-gestion': 'Dreams and Management',
+        'vuelo-constante': 'A Constant Flight',
+        'bio-intro': 'Leonardo Chaura (Buenos Aires, Argentina, 1988) is a guitarist, arranger and composer with a deep focus on the fusion of classical music, folklore and tango. His career, marked by curiosity and intuition, is a journey of sound exploration that has taken him through different genres, stages and countries.',
+        'bio-formacion1': 'At age 9, Leo began his studies at the Alberto Ginastera Music Conservatory under the guidance of renowned classical guitarist Carlos Magnano. This early training allowed him to develop an attentive sonority and technical mastery that he would soon apply to other traditions. At the same time, he immersed himself in Argentine folk music, playing in ballets and taking on the role of first guitar. It was a stage of wonder and discovery, navigating between the worlds of Bach and Los Chalchaleros, Tárrega and Atahualpa Yupanqui.',
+        'bio-formacion2': 'At 18, he decided to delve deeper into Argentine popular music, studying at the National Tango Academy with maestro Aníbal Arias, a figure who was decisive in his technical and expressive journey. He continued his training in harmony, orchestration and counterpoint with various masters, demonstrating a constant commitment to developing his musical language.',
+        'bio-gestion1': 'Over the years, his professional activity as a session musician and accompanist was consolidated in stages, theaters and cultural spaces in Argentina. During a tour, he settled for two years in Medellín, Colombia, where he managed and participated in numerous artistic proposals.',
+        'bio-gestion2': 'In Colombia, he was co-founder and manager of La Tanguería Parrilla y Tango, an iconic restaurant that became a tango reference in the country. This experience demonstrated his comprehensive business vision, from curating the musical lineup to operational management. His presentations at the "X and XI International Tango Festival Medellín", in collaboration with local musicians, were especially outstanding, including production and arrangements for genre fusion at the closing.',
+        'bio-gestion3': 'Upon his return to Buenos Aires, he was co-founder and manager of the La Cucha del Gotan cycle together with Santiago Cisnero and actively participated in the foundation and management of various milongas and cultural spaces, demonstrating his leadership and organizational capacity in the Buenos Aires cultural circuit.',
+        'bio-gestion4': 'Throughout his career, he managed participation in numerous stages, festivals and milongas, establishing relationships with venues and producers. Additionally, he co-managed a European tour in 2023 to promote his music together with Nahuel Conde through Spain, France, Switzerland and Italy, working in collaboration with a French producer for logistics and coordination.',
+        'bio-vuelo1': 'Currently, Leonardo records and produces new compositions, both instrumental and collaborative. His music has been presented in European countries and in various provinces of Argentina. He is in constant training and development, pursuing a specialization in Cultural Industries (UNTREF).',
+        'bio-vuelo2': 'He performs as a solo guitarist with his latest EP, Con Vos, Guitarra (2024), and offers specialized classes and seminars on "Harmony Applied to Tango" and "Analysis and Stylistic Development of Guitar in Tango". His work as an accompanying musician, director and musical producer complements his artistic profile, demonstrating his versatility and passion for musical language in all its forms.',
+        'partituras-titulo': 'Download some of my arrangements in PDF!',
+        'cita-bartok': '"Every art has the right to strike its roots in the art of a previous age; it not only has the right to do so, but it must spring from it." — Béla Bartók',
+        'contacto': 'CONTACT',
+        'facebook': 'Facebook',
+        'instagram': 'Instagram',
+        'copyright': '© 2025 Leo Chaura | Design & Development'
+      }
+    };
+    
+    function changeLanguage(lang) {
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+      
+      // Actualizar palabras intermitentes
+      if (window.updateSubtitulos) {
+        window.updateSubtitulos(lang);
+      }
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+  </script>
+  
   <!-- REPRODUCTOR FLOTANTE -->
   <div class="reproductor-flotante">
     <div class="reproductor-info">♪ Leo Chaura</div>

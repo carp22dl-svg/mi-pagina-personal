@@ -1,15 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const subtitulos = ["Guitarrista", "Productor", "Docente", "Compositor"];
+  const subtitulosES = ["Guitarrista", "Productor", "Docente", "Compositor"];
+  const subtitulosEN = ["Guitarist", "Producer", "Teacher", "Composer"];
   let index = 0;
   const subtitulo = document.getElementById("subtitulo");
+  let currentLang = 'es';
 
   const rotarSubtitulo = () => {
     subtitulo.style.opacity = 0;
     setTimeout(() => {
+      const subtitulos = currentLang === 'es' ? subtitulosES : subtitulosEN;
       subtitulo.textContent = subtitulos[index];
       subtitulo.style.opacity = 1;
       index = (index + 1) % subtitulos.length;
     }, 500);
+  };
+
+  window.updateSubtitulos = (lang) => {
+    currentLang = lang;
+    const subtitulos = lang === 'es' ? subtitulosES : subtitulosEN;
+    subtitulo.textContent = subtitulos[index];
   };
 
   rotarSubtitulo(); // Mostrar primero

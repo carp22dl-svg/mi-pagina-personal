@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leo Chaura | Músico Argentino</title>
+  <link rel="icon" href="imagenes/favicon.ico" type="image/x-icon">
+  <link rel="icon" sizes="16x16" href="imagenes/favicon-16x16.png" type="image/png">
+  <link rel="icon" sizes="32x32" href="imagenes/favicon-32x32.png" type="image/png">
+  <link rel="icon" sizes="48x48" href="imagenes/favicon-48x48.png" type="image/png">
+  <link rel="icon" sizes="96x96" href="imagenes/favicon-96x96.png" type="image/png">
+  <link rel="apple-touch-icon" sizes="180x180" href="imagenes/favicon-180x180.png">
+  <link rel="stylesheet" href="estilos.css?v=2">
+  <style>
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    .seccion {
+      margin: 0;
+      padding: 0;
+    }
+    .social-link {
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .social-link:hover {
+      transform: scale(1.2);
+    }
+    .language-switcher {
+      display: flex;
+      gap: 5px;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid #f5f5f5;
+      color: #f5f5f5;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 3px;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+    .lang-btn:hover, .lang-btn.active {
+      background: #f5f5f5;
+      color: #000;
+    }
+  </style>
+  <script src="script.js"></script>
+  <style>
+    .reproductor-flotante {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(26, 26, 26, 0.95);
+      border-radius: 50px;
+      padding: 15px 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      max-width: 350px;
+      transition: all 0.3s ease;
+    }
+    .reproductor-flotante:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    }
+    .reproductor-flotante audio {
+      flex: 1;
+      height: 30px;
+      border-radius: 15px;
+      outline: none;
+    }
+    .reproductor-info {
+      color: #d4af37;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    
+    /* Estilos responsivos para móviles */
+    @media (max-width: 768px) {
+      section#MUSICA .contenido {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 20px !important;
+        gap: 30px !important;
+      }
+      section#MUSICA .contenido:first-child {
+        text-align: center !important;
+        padding: 60px 20px 20px 20px !important;
+        margin-top: 0 !important;
+      }
+      section#MUSICA .contenido:last-child {
+        padding-top: 8cm !important;
+        margin-top: 0 !important;
+      }
+      section#MUSICA .contenido[style*="margin-top: -2cm"] {
+        margin-top: 0 !important;
+      }
+      .disco {
+        width: 100% !important;
+        max-width: 280px !important;
+        margin: 0 auto 10px auto !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+      }
+
+      .disco img {
+        margin: 0 auto 0.4cm auto !important;
+      }
+      #mis-lanzamientos {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+      .QUIÉNSOY .texto {
+        padding-top: 2cm !important;
+        background: rgba(0, 0, 0, 0.7) !important;
+        padding: 2cm 20px 20px 20px !important;
+        border-radius: 10px !important;
+        margin: 20px !important;
+      }
+
+      section.PARTITURAS {
+        min-height: 100vh !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        overflow-x: hidden !important;
+      }
+      section.PARTITURAS .contenido {
+        margin: 0 !important;
+        padding: 20px !important;
+        padding-bottom: 120px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      section.PARTITURAS ul {
+        padding-bottom: 100px !important;
+      }
+      .QUIÉNSOY .imagenes {
+        margin-top: 1cm !important;
+        gap: 70px !important;
+        padding-bottom: 120px !important;
+      }
+      .portada-texto h1 {
+        margin-top: 11cm !important;
+      }
+      .portada-texto h2#subtitulo {
+        margin-top: 0.2cm !important;
+      }
+      .iconos-redes {
+        margin-top: 7.4cm !important;
+      }
+      .portada-texto {
+        margin-top: -0.5cm !important;
+      }
+      section.QUIÉNSOY {
+        background-position: -25cm center !important;
+      }
+      footer {
+        padding-bottom: 120px !important;
+      }
+      section.MUSICA p[style*="margin: 50px auto 0 auto"] {
+        padding-bottom: 120px !important;
+      }
+      section.portada div[style*="bottom: calc(10px + 6.8cm)"] {
+        bottom: 12.5cm !important;
+        font-size: 10px !important;
+      }
+      section.portada div[style*="left: calc(20px + 2cm)"] {
+        bottom: calc(10px + 2.4cm) !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        font-size: 10px !important;
+      }
+      footer iframe {
+        width: 70% !important;
+        height: 150px !important;
+        max-width: 250px !important;
+      }
+      .navbar ul {
+        font-size: 10px !important;
+        gap: 8px !important;
+        justify-content: center !important;
+      }
+      .navbar ul li a {
+        padding: 8px 6px !important;
+        font-size: 10px !important;
+      }
+      .lang-btn {
+        padding: 4px 6px !important;
+        font-size: 9px !important;
+      }
+      .language-switcher {
+        gap: 3px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <ul>
+      <li><a href="#INICIO" data-translate="nav-inicio">INICIO</a></li>
+      <li><a href="#QUIENSOY" data-translate="nav-quiensoy">QUIÉN SOY</a></li>
+      <li><a href="#MUSICA" data-translate="nav-musica">MÚSICA</a></li>
+      <li><a href="#FOTOS" data-translate="nav-fotos">FOTOS</a></li>
+      <li><a href="#PARTITURAS" data-translate="nav-partituras">PARTITURAS</a></li>
+      <li class="language-switcher">
+        <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn active">ES</button>
+        <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- PORTADA -->
+  <section class="portada seccion" id="INICIO">
+    <img src="imagenes/portada.jpg" alt="Leo Chaura Portada" class="portada-img">
+    <div class="portada-texto">
+      <div class="iconos-redes" style="margin-top: -1.5cm;">
+        <a href="https://open.spotify.com/intl-es/artist/4T4g62LC61mwhuFHlOrwFP" target="_blank" title="Spotify">
+          <img src="imagenes/spotify.svg" alt="Spotify">
+        </a>
+        <a href="https://www.youtube.com/channel/UCJ1x9dUjGcfDHABrtfLWPTw" target="_blank" title="YouTube">
+          <img src="imagenes/youtube.svg" alt="YouTube">
+        </a>
+        <a href="https://www.deezer.com/mx/artist/144619302" target="_blank" title="Deezer">
+          <img src="imagenes/deezer.svg" alt="Deezer">
+        </a>
+      </div>
+      <h1 style="margin-top: -1cm;">Leo Chaura</h1>
+      <h2 id="subtitulo" data-translate="subtitulo">Músico</h2>
+    </div>
+    
+    <!-- CONTACTO -->
+    <footer style="background-color: #1a1a1a; padding: 40px 20px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center; max-width: 1200px; margin: 0 auto;">
+        <div style="flex: 1; min-width: 300px; text-align: center;">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 20px; animation: float 3s ease-in-out infinite;">
+            <h2 data-translate="contacto" style="color: #d4af37; font-family: 'Georgia', serif; margin: 0; font-size: 1.5em;">CONTACTO</h2>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#d4af37" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <p style="color: white; margin: 10px 0;"><a href="mailto:leochauramusico@gmail.com" class="social-link" style="color: #d4af37; text-decoration: none;">leochauramusico@gmail.com</a></p>
+          <div style="margin-top: 20px;">
+            <a href="https://www.facebook.com/leochaura/?locale=es_LA" target="_blank" class="social-link" data-translate="facebook" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Facebook</a>
+            <a href="https://www.instagram.com/leochaura/" target="_blank" class="social-link" data-translate="instagram" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Instagram</a>
+          </div>
+        </div>
+        <div style="flex: 1; min-width: 300px; max-width: 400px;">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d52562.03179175853!2d-58.65!3d-34.65!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc6d8b7c6b7b7%3A0x1234567890abcdef!2sMor%C3%B3n%2C%20Buenos%20Aires%2C%20Argentina!5e0!3m2!1ses!2sar!4v1234567890123!5m2!1ses!2sar" width="100%" height="200" style="border:0; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </footer>
+    
+    <!-- PIE DE PÁGINA -->
+    <div style="position: absolute; bottom: 10px; left: calc(20px + 2cm); color: #888; font-size: 12px; font-family: 'Georgia', serif;">
+      <span data-translate="copyright">© 2025 Leo Chaura | Diseño y Desarrollo</span>
+    </div>
+    <div style="position: absolute; bottom: calc(10px + 6.8cm); right: 20px; color: #888; font-size: 12px; font-family: 'Georgia', serif;">
+      Ph MechiFuz
+    </div>
+  </section>
+
+  <!-- QUIÉN SOY -->
+  <section id="QUIENSOY" class="QUIÉNSOY seccion">
+    <div class="contenido" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; justify-content: center;">
+      <div class="texto" style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
+        <h2 id="sobre-mi" data-translate="sobre-mi">Sobre mí</h2>
+        <p data-translate="bio-intro">Leonardo Chaura (Buenos Aires, Argentina, 1988) es un guitarrista, arreglador y compositor con un profundo enfoque en la fusión de la música clásica, el folklore y el tango. Su carrera, marcada por la curiosidad y la intuición, es un viaje de exploración sonora que lo ha llevado por distintos géneros, escenarios y países.</p>
+        <h3 class="subseccion" data-translate="inicios-formacion">Inicios y Formación</h3>
+        <p data-translate="bio-formacion1">A los 9 años, Leo comenzó sus estudios en el Conservatorio de Música Alberto Ginastera bajo la guía del reconocido guitarrista clásico Carlos Magnano. Esta formación temprana le permitió desarrollar una sonoridad atenta y un dominio técnico que pronto aplicaría a otras tradiciones. Paralelamente, se sumergió en la música folklórica argentina, tocando en ballets y asumiendo el rol de primera guitarra. Fue una etapa de asombro y descubrimiento, navegando entre los mundos de Bach y Los Chalchaleros, de Tárrega y Atahualpa Yupanqui.</p>
+        <p data-translate="bio-formacion2">A los 18 años, decidió profundizar en la música popular argentina, estudiando en la Academia Nacional del Tango con el maestro Aníbal Arias, una figura que fue decisiva en su recorrido técnico y expresivo. Continuó su formación en armonía, orquestación y contrapunto con diversos maestros, demostrando un compromiso constante con el desarrollo de su lenguaje musical.</p>
+        <h3 class="subseccion" data-translate="suenos-gestion">Los Sueños y la Gestión</h3>
+        <p data-translate="bio-gestion1">Con los años, su actividad profesional como músico sesionista y acompañante se consolidó en escenarios, teatros y espacios culturales de Argentina. Durante una gira, se estableció por dos años en Medellín, Colombia, donde gestionó y participó en numerosas propuestas artísticas.</p>
+        <p data-translate="bio-gestion2">En Colombia, fue co-fundador y gestor de La Tanguería Parrilla y Tango, un icónico resto que se convirtió en un referente del tango en el país. Esta experiencia demostró su visión integral del negocio, desde la curaduría de la grilla musical hasta la gestión operativa. Sus presentaciones en el "X y XI Festival Internacional de Tango Medellín", en colaboración con músicos locales, fueron especialmente destacadas, incluyendo la producción y los arreglos para la fusión de géneros en la clausura.</p>
+        <p data-translate="bio-gestion3">A su regreso a Buenos Aires, fue cofundador y gestor del ciclo La Cucha del Gotan junto a Santiago Cisnero y participó activamente en la fundación y gestión de diversas milongas y espacios culturales, demostrando su capacidad de liderazgo y organización en el circuito cultural de Buenos Aires.</p>
+        <p data-translate="bio-gestion4">A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.</p>
+        <h3 class="subseccion" data-translate="vuelo-constante">Un Vuelo Constante</h3>
+        <p data-translate="bio-vuelo1">Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).</p>
+        <p data-translate="bio-vuelo2">Se desempeña como guitarrista solista con su último EP, <em>Con Vos, Guitarra</em> (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.</p>
+      </div>
+      <div class="imagenes" style="flex: 1 1 250px; min-width: 220px; max-width: 400px; display: flex; flex-direction: column; gap: 100px; align-items: center;">
+        <img src="imagenes/tocando.jpg" alt="tocando" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite;">
+        <img src="imagenes/escenario.jpeg" alt="tocando2" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 1s;">
+        <img src="imagenes/tocando3.jpg" alt="tocando3" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 2s;">
+      </div>
+    </div>
+  </section>
+
+  <!-- MÚSICA -->
+  <section class="MUSICA seccion" id="MUSICA">
+    <div class="contenido" style="margin-top: -2cm;">
+      <div class="texto">
+        <h2 id="mis-lanzamientos" data-translate="mis-lanzamientos">Mis últimos lanzamientos!</h2>
+      </div>
+    </div>
+    <div class="contenido" style="margin-top: -2cm;">
+      <div class="disco" style="flex: 1; min-width: 250px; text-align: center; animation: float 3s ease-in-out infinite;">
+        <h3 style="color: white; margin-bottom: 15px;">Con Vos, Guitarra (2024)</h3>
+        <img src="imagenes/convosguitarra.png" alt="Con Vos, Guitarra" style="width:100%;max-width:180px;border-radius:8px;box-shadow:0 2px 8px rgb(0,0,0,0.2); margin-bottom: 15px;">
+        <div style="display: flex; justify-content: center; gap: 15px;">
+          <a href="https://open.spotify.com/intl-es/album/62yaRDoveeHIAp3WV5aRwk?si=zxSQoDkIQUacSahczLccDA" target="_blank"><img src="imagenes/spotify.svg" alt="Spotify" style="width:25px;height:25px;"></a>
+          <a href="https://music.youtube.com/playlist?list=PLBynp-rfTRXgm-PyIMR3jO-dTqf4QDZTX" target="_blank"><img src="imagenes/youtube.svg" alt="YouTube" style="width:25px;height:25px;"></a>
+          <a href="https://link.deezer.com/s/317RxJ7c4TG3tFuYZ5JDm" target="_blank"><img src="imagenes/deezer.svg" alt="Deezer" style="width:25px;height:25px;"></a>
+        </div>
+      </div>
+      <div class="disco" style="flex: 1; min-width: 250px; text-align: center; animation: float 3s ease-in-out infinite 1s;">
+        <h3 style="color: white; margin-bottom: 15px;">Una tarde de Tango (2025)</h3>
+        <img src="imagenes/Una tarde de Tango.jpg" alt="Una tarde de Tango" style="width:100%;max-width:180px;border-radius:8px;box-shadow:0 2px 8px rgb(0,0,0,0.2); margin-bottom: 15px;">
+        <div style="display: flex; justify-content: center; gap: 15px;">
+          <a href="https://open.spotify.com/intl-es/album/7p2KwHcyW5yg7VWSrlC8dG?si=pvGL4AGOStabft595ri3RA" target="_blank"><img src="imagenes/spotify.svg" alt="Spotify" style="width:25px;height:25px;"></a>
+          <a href="https://music.youtube.com/playlist?list=OLAK5uy_kh7-t552HLg-Ftv_SsweW06fQfdn6ZQ8g" target="_blank"><img src="imagenes/youtube.svg" alt="YouTube" style="width:25px;height:25px;"></a>
+          <a href="https://link.deezer.com/s/317Rz7K9F0qdXcrrnI42f" target="_blank"><img src="imagenes/deezer.svg" alt="Deezer" style="width:25px;height:25px;"></a>
+        </div>
+      </div>
+      <div class="disco" style="flex: 1; min-width: 250px; text-align: center; animation: float 3s ease-in-out infinite 2s;">
+        <h3 style="color: white; margin-bottom: 15px;">De Ortúzar a Morón (2023)</h3>
+        <img src="imagenes/De Ortuzar a Moron.jpg" alt="De Ortúzar a Morón" style="width:100%;max-width:180px;border-radius:8px;box-shadow:0 2px 8px rgb(0,0,0,0.2); margin-bottom: 15px;">
+        <div style="display: flex; justify-content: center; gap: 15px;">
+          <a href="https://open.spotify.com/album/4cux5xzJwWwnd0vC1a88aH?si=gqp1FkCRRBmcWbkkqmKDRA" target="_blank"><img src="imagenes/spotify.svg" alt="Spotify" style="width:25px;height:25px;"></a>
+          <a href="https://music.youtube.com/playlist?list=OLAK5uy_kBMHeuwTkVxM83CV_S92-J0SQIlFf2FeQ" target="_blank"><img src="imagenes/youtube.svg" alt="YouTube" style="width:25px;height:25px;"></a>
+          <a href="https://link.deezer.com/s/317RzWfplPurmU2igm7dB" target="_blank"><img src="imagenes/deezer.svg" alt="Deezer" style="width:25px;height:25px;"></a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- CITA -->
+    <p data-translate="cita-bartok" style="font-style: italic; color: #d4af37; font-size: 18px; max-width: 800px; margin: 50px auto 0 auto; line-height: 1.6; font-family: 'Georgia', serif; text-align: center;">
+      "Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók
+    </p>
+  </section>
+
+  <!-- FOTOS -->
+  <section class="FOTOS seccion" id="FOTOS" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); min-height: 100vh; padding: 80px 20px;">
+    <div class="contenido">
+      <h2 data-translate="fotos-titulo" style="text-align: center; color: #d4af37; font-family: 'Georgia', serif; font-size: 2.5em; margin-bottom: 20px;">Galería de Fotos</h2>
+      <p data-translate="fotos-subtitulo" style="text-align: center; color: #ccc; font-size: 16px; margin-bottom: 50px;">Fotos profesionales para productores y medios</p>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1400px; margin: 0 auto;">
+        
+        <!-- Foto 1 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos1.jpg" alt="Leo Chaura - Foto 1" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos1.jpg" download="Leo_Chaura_Foto1.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Foto 2 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos2.jpg" alt="Leo Chaura - Foto 2" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos2.jpg" download="Leo_Chaura_Foto2.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Foto 3 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos3.jpg" alt="Leo Chaura - Foto 3" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos3.jpg" download="Leo_Chaura_Foto3.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Foto 4 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos4.jpg" alt="Leo Chaura - Foto 4" style="width: 100%; height: 280px; object-fit: cover; object-position: center top;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos4.jpg" download="Leo_Chaura_Foto4.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Foto 5 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos5.jpg" alt="Leo Chaura - Foto 5" style="width: 100%; height: 280px; object-fit: cover; object-position: center top;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos5.jpg" download="Leo_Chaura_Foto5.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Foto 6 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.1)'; this.style.zIndex='10'" onmouseout="this.style.transform='scale(1)'; this.style.zIndex='1'">
+          <img src="imagenes/Fotos6.jpg" alt="Leo Chaura - Foto 6" style="width: 100%; height: 280px; object-fit: cover; object-position: center -30px;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0.7; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.7'">
+            <a href="imagenes/Fotos6.jpg" download="Leo_Chaura_Foto6.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px; border-radius: 50%; text-decoration: none; display: flex; align-items: center; justify-content: center;" title="Descargar foto">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+      </div>
+      
+      <!-- Texto descriptivo -->
+      <div style="text-align: center; margin-top: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+        <p data-translate="fotos-descripcion" style="color: #ccc; font-size: 16px; line-height: 1.6; font-style: italic;">
+          "Fotos profesionales disponibles para productores, medios y organizadores de eventos. Todas las imágenes están en alta resolución y listas para uso promocional."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTITURAS -->
+  <section class="PARTITURAS seccion" id="PARTITURAS" style="background-image: url('imagenes/fondopartituras.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;">
+    <div class="contenido">
+      <div class="texto">
+        <h2 id="partituras-titulo" data-translate="partituras-titulo" style="padding-top: 2cm; text-align: center;">Descargá algunos de mis arreglos en PDF!</h2>
+      </div>
+    </div>
+    <div class="contenido" style="padding-top: 3cm;">
+      <div class="texto">
+        <ul style="margin-top: -1cm;">
+          <li style="margin-bottom: 1cm; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); transition: all 0.3s ease;"><a href="#" style="transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.parentElement.style.transform='scale(1.2)'" onmouseout="this.style.color=''; this.parentElement.style.transform='scale(1)'">Un cielo, todos los cielos (Leo Chaura)</a></li>
+          <li style="margin-bottom: 1cm; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); transition: all 0.3s ease;"><a href="#" style="transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.parentElement.style.transform='scale(1.2)'" onmouseout="this.style.color=''; this.parentElement.style.transform='scale(1)'">Corralera (Anselmo Aieta)</a></li>
+          <li style="margin-bottom: 1cm; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); transition: all 0.3s ease;"><a href="#" style="transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.parentElement.style.transform='scale(1.2)'" onmouseout="this.style.color=''; this.parentElement.style.transform='scale(1)'">Nuovo Cinema Paradiso (Ennio Morricone)</a></li>
+          <li style="margin-bottom: 1cm; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); transition: all 0.3s ease;"><a href="#" style="transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.parentElement.style.transform='scale(1.2)'" onmouseout="this.style.color=''; this.parentElement.style.transform='scale(1)'">Infancia (Ennio Morricone)</a></li>
+          <li style="margin-bottom: 1cm; font-size: 1.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); transition: all 0.3s ease;"><a href="#" style="transition: all 0.3s ease;" onmouseover="this.style.color='white'; this.parentElement.style.transform='scale(1.2)'" onmouseout="this.style.color=''; this.parentElement.style.transform='scale(1)'">Milonga Gris (Negro Aguirre)</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <script>
+    // SPA: mostrar solo la sección activa
+    function mostrarSeccion() {
+      const hash = window.location.hash || "#INICIO";
+      document.querySelectorAll('.seccion').forEach(sec => {
+        sec.style.display = sec.id === hash.replace('#', '') ? 'block' : 'none';
+      });
+      // Animar título Discografía
+      const discografiaTitulo = document.getElementById('discografia-titulo');
+      if (hash === '#MUSICA' && discografiaTitulo) {
+        discografiaTitulo.classList.add('visible');
+      } else if (discografiaTitulo) {
+        discografiaTitulo.classList.remove('visible');
+      }
+    }
+    window.addEventListener('hashchange', mostrarSeccion);
+    window.addEventListener('DOMContentLoaded', mostrarSeccion);
+  </script>
+  
+  <script>
+    const translations = {
+      es: {
+        'nav-inicio': 'INICIO',
+        'nav-quiensoy': 'QUIÉN SOY',
+        'nav-musica': 'MÚSICA',
+        'nav-fotos': 'FOTOS',
+        'nav-partituras': 'PARTITURAS',
+        'subtitulo': 'Músico',
+        'sobre-mi': 'Sobre mí',
+        'mis-lanzamientos': 'Mis últimos lanzamientos!',
+        'inicios-formacion': 'Inicios y Formación',
+        'suenos-gestion': 'Los Sueños y la Gestión',
+        'vuelo-constante': 'Un Vuelo Constante',
+        'bio-intro': 'Leonardo Chaura (Buenos Aires, Argentina, 1988) es un guitarrista, arreglador y compositor con un profundo enfoque en la fusión de la música clásica, el folklore y el tango. Su carrera, marcada por la curiosidad y la intuición, es un viaje de exploración sonora que lo ha llevado por distintos géneros, escenarios y países.',
+        'bio-formacion1': 'A los 9 años, Leo comenzó sus estudios en el Conservatorio de Música Alberto Ginastera bajo la guía del reconocido guitarrista clásico Carlos Magnano. Esta formación temprana le permitió desarrollar una sonoridad atenta y un dominio técnico que pronto aplicaría a otras tradiciones. Paralelamente, se sumergió en la música folklórica argentina, tocando en ballets y asumiendo el rol de primera guitarra. Fue una etapa de asombro y descubrimiento, navegando entre los mundos de Bach y Los Chalchaleros, de Tárrega y Atahualpa Yupanqui.',
+        'bio-formacion2': 'A los 18 años, decidió profundizar en la música popular argentina, estudiando en la Academia Nacional del Tango con el maestro Aníbal Arias, una figura que fue decisiva en su recorrido técnico y expresivo. Continuó su formación en armonía, orquestación y contrapunto con diversos maestros, demostrando un compromiso constante con el desarrollo de su lenguaje musical.',
+        'bio-gestion1': 'Con los años, su actividad profesional como músico sesionista y acompañante se consolidó en escenarios, teatros y espacios culturales de Argentina. Durante una gira, se estableció por dos años en Medellín, Colombia, donde gestionó y participó en numerosas propuestas artísticas.',
+        'bio-gestion2': 'En Colombia, fue co-fundador y gestor de La Tanguería Parrilla y Tango, un icónico resto que se convirtió en un referente del tango en el país. Esta experiencia demostró su visión integral del negocio, desde la curaduría de la grilla musical hasta la gestión operativa. Sus presentaciones en el "X y XI Festival Internacional de Tango Medellín", en colaboración con músicos locales, fueron especialmente destacadas, incluyendo la producción y los arreglos para la fusión de géneros en la clausura.',
+        'bio-gestion3': 'A su regreso a Buenos Aires, fue cofundador y gestor del ciclo La Cucha del Gotan junto a Santiago Cisnero y participó activamente en la fundación y gestión de diversas milongas y espacios culturales, demostrando su capacidad de liderazgo y organización en el circuito cultural de Buenos Aires.',
+        'bio-gestion4': 'A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.',
+        'bio-vuelo1': 'Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).',
+        'bio-vuelo2': 'Se desempeña como guitarrista solista con su último EP, Con Vos, Guitarra (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.',
+        'fotos-titulo': 'Galería de Fotos',
+        'fotos-subtitulo': 'Fotos profesionales para productores y medios',
+        'fotos-descripcion': '"Fotos profesionales disponibles para productores, medios y organizadores de eventos. Todas las imágenes están en alta resolución y listas para uso promocional."',
+        'descargar': 'Descargar',
+        'partituras-titulo': 'Descargá algunos de mis arreglos en PDF!',
+        'cita-bartok': '"Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók',
+        'contacto': 'CONTACTO',
+        'facebook': 'Facebook',
+        'instagram': 'Instagram',
+        'copyright': '© 2025 Leo Chaura | Diseño y Desarrollo'
+      },
+      en: {
+        'nav-inicio': 'HOME',
+        'nav-quiensoy': 'ABOUT ME',
+        'nav-musica': 'MUSIC',
+        'nav-fotos': 'PHOTOS',
+        'nav-partituras': 'SHEET MUSIC',
+        'subtitulo': 'Musician',
+        'sobre-mi': 'About me',
+        'mis-lanzamientos': 'My latest releases!',
+        'inicios-formacion': 'Beginnings and Training',
+        'suenos-gestion': 'Dreams and Management',
+        'vuelo-constante': 'A Constant Flight',
+        'bio-intro': 'Leonardo Chaura (Buenos Aires, Argentina, 1988) is a guitarist, arranger and composer with a deep focus on the fusion of classical music, folklore and tango. His career, marked by curiosity and intuition, is a journey of sound exploration that has taken him through different genres, stages and countries.',
+        'bio-formacion1': 'At age 9, Leo began his studies at the Alberto Ginastera Music Conservatory under the guidance of renowned classical guitarist Carlos Magnano. This early training allowed him to develop an attentive sonority and technical mastery that he would soon apply to other traditions. At the same time, he immersed himself in Argentine folk music, playing in ballets and taking on the role of first guitar. It was a stage of wonder and discovery, navigating between the worlds of Bach and Los Chalchaleros, Tárrega and Atahualpa Yupanqui.',
+        'bio-formacion2': 'At 18, he decided to delve deeper into Argentine popular music, studying at the National Tango Academy with maestro Aníbal Arias, a figure who was decisive in his technical and expressive journey. He continued his training in harmony, orchestration and counterpoint with various masters, demonstrating a constant commitment to developing his musical language.',
+        'bio-gestion1': 'Over the years, his professional activity as a session musician and accompanist was consolidated in stages, theaters and cultural spaces in Argentina. During a tour, he settled for two years in Medellín, Colombia, where he managed and participated in numerous artistic proposals.',
+        'bio-gestion2': 'In Colombia, he was co-founder and manager of La Tanguería Parrilla y Tango, an iconic restaurant that became a tango reference in the country. This experience demonstrated his comprehensive business vision, from curating the musical lineup to operational management. His presentations at the "X and XI International Tango Festival Medellín", in collaboration with local musicians, were especially outstanding, including production and arrangements for genre fusion at the closing.',
+        'bio-gestion3': 'Upon his return to Buenos Aires, he was co-founder and manager of the La Cucha del Gotan cycle together with Santiago Cisnero and actively participated in the foundation and management of various milongas and cultural spaces, demonstrating his leadership and organizational capacity in the Buenos Aires cultural circuit.',
+        'bio-gestion4': 'Throughout his career, he managed participation in numerous stages, festivals and milongas, establishing relationships with venues and producers. Additionally, he co-managed a European tour in 2023 to promote his music together with Nahuel Conde through Spain, France, Switzerland and Italy, working in collaboration with a French producer for logistics and coordination.',
+        'bio-vuelo1': 'Currently, Leonardo records and produces new compositions, both instrumental and collaborative. His music has been presented in European countries and in various provinces of Argentina. He is in constant training and development, pursuing a specialization in Cultural Industries (UNTREF).',
+        'bio-vuelo2': 'He performs as a solo guitarist with his latest EP, Con Vos, Guitarra (2024), and offers specialized classes and seminars on "Harmony Applied to Tango" and "Analysis and Stylistic Development of Guitar in Tango". His work as an accompanying musician, director and musical producer complements his artistic profile, demonstrating his versatility and passion for musical language in all its forms.',
+        'fotos-titulo': 'Photo Gallery',
+        'fotos-subtitulo': 'Professional photos for producers and media',
+        'fotos-descripcion': '"Professional photos available for producers, media and event organizers. All images are in high resolution and ready for promotional use."',
+        'descargar': 'Download',
+        'partituras-titulo': 'Download some of my arrangements in PDF!',
+        'cita-bartok': '"Every art has the right to strike its roots in the art of a previous age; it not only has the right to do so, but it must spring from it." — Béla Bartók',
+        'contacto': 'CONTACT',
+        'facebook': 'Facebook',
+        'instagram': 'Instagram',
+        'copyright': '© 2025 Leo Chaura | Design & Development'
+      }
+    };
+    
+    function changeLanguage(lang) {
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[lang][key]) {
+          element.textContent = translations[lang][key];
+        }
+      });
+      
+      // Actualizar palabras intermitentes
+      if (window.updateSubtitulos) {
+        window.updateSubtitulos(lang);
+      }
+      
+      // Actualizar botones activos
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+  </script>
+  
+  <!-- REPRODUCTOR FLOTANTE -->
+  <div class="reproductor-flotante">
+    <div class="reproductor-info">♪ Leo Chaura</div>
+    <audio controls>
+      <source src="audio/mi_composicion.mp3" type="audio/mpeg">
+      <source src="audio/mi_composicion.wav" type="audio/wav">
+      <source src="audio/mi_composicion.ogg" type="audio/ogg">
+      Tu navegador no soporta el elemento de audio.
+    </audio>
+  </div>
+
+</body>
+</html>

@@ -154,6 +154,7 @@ html {
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.6s ease, transform 0.6s ease;
+  color: #d4af37;
 }
 
 .QUIÉNSOY .texto h2.visible {
@@ -198,8 +199,8 @@ html {
   transform: translateX(60px) scale(0.95);
   transition: opacity 0.7s, transform 0.7s;
   margin-top: 60px;
-  margin-left: -570px;
-  color: #f5f5dc;
+  margin-left: 0px;
+  color: #d4af37;
 }
 
 .MUSICA .texto h2.visible {
@@ -386,7 +387,7 @@ footer a:hover {
   opacity: 0;
   transform: translateX(60px) scale(0.95);
   transition: opacity 0.7s, transform 0.7s;
-  color: #f5f5dc;
+  color: #d4af37;
 }
 
 .PARTITURAS .texto h2.visible {
@@ -424,4 +425,18 @@ footer a:hover {
   transform: scale(1.7);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
   z-index: 10;
+}
+
+/* === SECCIÓN FOTOS === */
+.FOTOS .texto h2 {
+  opacity: 0;
+  transform: translateX(60px) scale(0.95);
+  transition: opacity 0.7s, transform 0.7s;
+  color: #d4af37;
+}
+
+.FOTOS .texto h2.visible {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  animation: bounceInRight 0.7s;
 }

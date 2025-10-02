@@ -49,6 +49,19 @@
       background: #f5f5f5;
       color: #000;
     }
+    
+    /* Posicionar language-switcher en escritorio */
+    @media (min-width: 769px) {
+      .navbar {
+        justify-content: flex-end;
+      }
+      .navbar .language-switcher {
+        position: fixed;
+        top: 10px;
+        left: 20px;
+        z-index: 1001;
+      }
+    }
   </style>
   <script src="script.js"></script>
   <style>
@@ -83,6 +96,22 @@
       font-size: 12px;
       font-weight: 500;
       white-space: nowrap;
+    }
+    
+    .copy-email-btn {
+      background: none;
+      border: none;
+      color: #d4af37;
+      cursor: pointer;
+      margin-left: 8px;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+    
+    .copy-email-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+      transform: scale(1.1);
     }
     
     /* Estilos responsivos para móviles */
@@ -172,7 +201,11 @@
         padding-bottom: 120px !important;
       }
       section.MUSICA p[style*="margin: 50px auto 0 auto"] {
-        padding-bottom: 120px !important;
+        padding-bottom: 150px !important;
+        font-size: 14px !important;
+        margin-left: 30px !important;
+        margin-right: 30px !important;
+        margin-bottom: 30px !important;
       }
       section.portada div[style*="bottom: calc(10px + 6.8cm)"] {
         bottom: 12.5cm !important;
@@ -189,36 +222,213 @@
         height: 150px !important;
         max-width: 250px !important;
       }
+      .navbar {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        background-color: rgba(0, 0, 0, 0.3) !important;
+        padding: 10px !important;
+        z-index: 1000 !important;
+        border-radius: 0 !important;
+        display: flex !important;
+        justify-content: flex-end !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+      }
+      
+      .navbar .language-switcher {
+        position: absolute !important;
+        left: 10px !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        margin: 0 !important;
+        display: flex !important;
+      }
+      
       .navbar ul {
-        font-size: 10px !important;
-        gap: 8px !important;
-        justify-content: center !important;
+        display: none !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        background-color: rgba(0, 0, 0, 0.5) !important;
+        padding: 10px !important;
+        margin: 0 !important;
+        border-radius: 0 0 10px 10px !important;
       }
+      
+      .navbar ul.show {
+        display: flex !important;
+      }
+      
+      .navbar ul li {
+        margin: 0 !important;
+        text-align: center !important;
+      }
+      
       .navbar ul li a {
-        padding: 8px 6px !important;
-        font-size: 10px !important;
+        display: block !important;
+        padding: 12px 20px !important;
+        font-size: 14px !important;
+        color: #f5f5f5 !important;
+        text-decoration: none !important;
+        border: 1px solid #444 !important;
+        border-radius: 8px !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        transition: all 0.3s ease !important;
       }
+      
+      .navbar ul li a:hover {
+        background: rgba(212, 175, 55, 0.2) !important;
+        border-color: #d4af37 !important;
+        transform: translateY(-2px) !important;
+      }
+      
+      .navbar-toggle {
+        display: block !important;
+        background: none !important;
+        border: none !important;
+        color: #f5f5f5 !important;
+        font-size: 24px !important;
+        cursor: pointer !important;
+        padding: 5px !important;
+        margin-right: 5px !important;
+      }
+      
+
+      
       .lang-btn {
-        padding: 4px 6px !important;
-        font-size: 9px !important;
-      }
-      .language-switcher {
-        gap: 3px !important;
+        padding: 8px 12px !important;
+        font-size: 12px !important;
       }
     }
+    
+    /* Modal Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      overflow: auto;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      margin: 50px auto;
+      max-width: 55%;
+      width: auto;
+      display: block;
+    }
+    
+    .lightbox-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      display: block;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #f1f1f1;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10000;
+    }
+    
+    .lightbox-close:hover {
+      color: #d4af37;
+    }
+    
+    .lightbox-download {
+      position: absolute;
+      top: 20px;
+      right: 90px;
+      background: rgba(212, 175, 55, 0.9);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      z-index: 10000;
+      transition: background 0.3s ease;
+    }
+    
+    .lightbox-download:hover {
+      background: rgba(212, 175, 55, 1);
+    }
+    
+    .foto-thumbnail {
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .foto-thumbnail:hover {
+      transform: scale(1.05);
+    }
+    
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(212, 175, 55, 0.8);
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 15px 20px;
+      cursor: pointer;
+      border-radius: 50%;
+      z-index: 10001;
+      transition: background 0.3s ease;
+    }
+    
+    .lightbox-nav:hover {
+      background: rgba(212, 175, 55, 1);
+    }
+    
+    .lightbox-prev {
+      left: 20px;
+    }
+    
+    .lightbox-next {
+      right: 20px;
+    }
+    
+
+    
+    @keyframes bounceInRight {
+      0% { opacity: 0; transform: translateX(60px) scale(0.8); }
+      60% { opacity: 1; transform: translateX(-10px) scale(1.05); }
+      80% { transform: translateX(4px) scale(0.97); }
+      100% { opacity: 1; transform: translateX(0) scale(1); }
+    }
   </style>
+
 </head>
 <body>
   <nav class="navbar">
-    <ul>
-      <li><a href="#INICIO" data-translate="nav-inicio">INICIO</a></li>
-      <li><a href="#QUIENSOY" data-translate="nav-quiensoy">QUIÉN SOY</a></li>
-      <li><a href="#MUSICA" data-translate="nav-musica">MÚSICA</a></li>
-      <li><a href="#PARTITURAS" data-translate="nav-partituras">PARTITURAS</a></li>
-      <li class="language-switcher">
-        <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn active">ES</button>
-        <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
-      </li>
+    <button class="navbar-toggle" onclick="toggleNavbar()" style="display: none;">☰</button>
+    <div class="language-switcher">
+      <button onclick="changeLanguage('es')" id="btn-es" class="lang-btn active">ES</button>
+      <button onclick="changeLanguage('en')" id="btn-en" class="lang-btn">EN</button>
+    </div>
+    <ul id="navbar-menu">
+      <li><a href="#INICIO" data-translate="nav-inicio" onclick="closeNavbar()">INICIO</a></li>
+      <li><a href="#QUIENSOY" data-translate="nav-quiensoy" onclick="closeNavbar()">QUIÉN SOY</a></li>
+      <li><a href="#MUSICA" data-translate="nav-musica" onclick="closeNavbar()">MÚSICA</a></li>
+      <li><a href="#FOTOS" data-translate="nav-fotos" onclick="closeNavbar()">FOTOS</a></li>
+      <li><a href="#PARTITURAS" data-translate="nav-partituras" onclick="closeNavbar()">PARTITURAS</a></li>
     </ul>
   </nav>
 
@@ -251,7 +461,14 @@
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
           </div>
-          <p style="color: white; margin: 10px 0;"><a href="mailto:leochauramusico@gmail.com" class="social-link" style="color: #d4af37; text-decoration: none;">leochauramusico@gmail.com</a></p>
+          <p style="color: white; margin: 10px 0; display: flex; align-items: center; justify-content: center;">
+            <a href="mailto:leochauramusico@gmail.com" class="social-link" style="color: #d4af37; text-decoration: none;">leochauramusico@gmail.com</a>
+            <button class="copy-email-btn" onclick="copyEmail()" title="Copiar email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+              </svg>
+            </button>
+          </p>
           <div style="margin-top: 20px;">
             <a href="https://www.facebook.com/leochaura/?locale=es_LA" target="_blank" class="social-link" data-translate="facebook" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Facebook</a>
             <a href="https://www.instagram.com/leochaura/" target="_blank" class="social-link" data-translate="instagram" style="color: #d4af37; margin: 0 10px; text-decoration: none;">Instagram</a>
@@ -273,7 +490,7 @@
   </section>
 
   <!-- QUIÉN SOY -->
-  <section id="QUIENSOY" class="QUIÉNSOY seccion">
+  <section id="QUIENSOY" class="QUIÉNSOY seccion" style="padding-top: 3cm;">
     <div class="contenido" style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; justify-content: center;">
       <div class="texto" style="flex: 1 1 350px; min-width: 300px; max-width: 600px;">
         <h2 id="sobre-mi" data-translate="sobre-mi">Sobre mí</h2>
@@ -292,8 +509,8 @@
       </div>
       <div class="imagenes" style="flex: 1 1 250px; min-width: 220px; max-width: 400px; display: flex; flex-direction: column; gap: 100px; align-items: center;">
         <img src="imagenes/tocando.jpg" alt="tocando" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite;">
-        <img src="imagenes/escenario.jpeg" alt="tocando2" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 1s;">
-        <img src="imagenes/tocando3.jpg" alt="tocando3" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 2s;">
+        <img src="imagenes/tocando3.jpg" alt="tocando3" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 1s;">
+        <img src="imagenes/escenario.jpeg" alt="tocando2" style="width:100%;max-width:350px;border-radius:10px;box-shadow:0 4px 10px rgb(0,0,0);animation: float 3s ease-in-out infinite 2s;">
       </div>
     </div>
   </section>
@@ -344,6 +561,119 @@
     </p>
   </section>
 
+  <!-- FOTOS -->
+  <section class="FOTOS seccion" id="FOTOS" style="background: #000; min-height: 100vh; padding: 80px 20px;">
+    <div class="contenido">
+      <div class="texto" style="text-align: center;">
+        <h2 id="fotos-titulo" data-translate="fotos-titulo">Galería de Fotos</h2>
+      </div>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; max-width: 1400px; margin: 2cm auto 0 auto;">
+        
+        <!-- Foto 4 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos4.jpg" alt="Leo Chaura - Foto 4" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover; object-position: center top;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos4.jpg" download="Leo_Chaura_Foto4.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+        <!-- Foto 5 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos5.jpg" alt="Leo Chaura - Foto 5" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover; object-position: left top;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos5.jpg" download="Leo_Chaura_Foto5.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+        <!-- Foto 6 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos6.jpg" alt="Leo Chaura - Foto 6" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover; object-position: center -30px;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos6.jpg" download="Leo_Chaura_Foto6.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+        <!-- Foto 1 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease; group;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos1.jpg" alt="Leo Chaura - Foto 1" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos1.jpg" download="Leo_Chaura_Foto1.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+        <!-- Foto 2 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos2.jpg" alt="Leo Chaura - Foto 2" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos2.jpg" download="Leo_Chaura_Foto2.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+        <!-- Foto 3 -->
+        <div style="position: relative; overflow: hidden; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.3); transition: transform 0.3s ease;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="imagenes/Fotos3.jpg" alt="Leo Chaura - Foto 3" class="foto-thumbnail" style="width: 100%; height: 280px; object-fit: cover;">
+          <div style="position: absolute; top: 10px; right: 10px; opacity: 0; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'">
+            <a href="imagenes/Fotos3.jpg" download="Leo_Chaura_Foto3.jpg" style="background: rgba(212, 175, 55, 0.9); color: white; padding: 8px 12px; border-radius: 20px; text-decoration: none; font-size: 12px; display: flex; align-items: center; gap: 5px;" data-translate="descargar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+              </svg>
+              Descargar
+            </a>
+          </div>
+
+        </div>
+        
+      </div>
+    </div>
+  </section>
+  
+  <!-- Modal Lightbox -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <a id="lightbox-download" class="lightbox-download" href="" download="" onclick="event.stopPropagation()" data-translate="descargar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+        <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
+      </svg>
+      Descargar
+    </a>
+    <button class="lightbox-nav lightbox-prev" onclick="event.stopPropagation(); prevImage()">&lt;</button>
+    <button class="lightbox-nav lightbox-next" onclick="event.stopPropagation(); nextImage()">&gt;</button>
+    <div class="lightbox-content">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+  </div>
+
   <!-- PARTITURAS -->
   <section class="PARTITURAS seccion" id="PARTITURAS" style="background-image: url('imagenes/fondopartituras.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;">
     <div class="contenido">
@@ -374,16 +704,90 @@
       document.querySelectorAll('.seccion').forEach(sec => {
         sec.style.display = sec.id === hash.replace('#', '') ? 'block' : 'none';
       });
-      // Animar título Discografía
-      const discografiaTitulo = document.getElementById('discografia-titulo');
-      if (hash === '#MUSICA' && discografiaTitulo) {
-        discografiaTitulo.classList.add('visible');
-      } else if (discografiaTitulo) {
-        discografiaTitulo.classList.remove('visible');
+      // Animar título Música
+      const musicaTitulo = document.getElementById('mis-lanzamientos');
+      if (hash === '#MUSICA' && musicaTitulo) {
+        musicaTitulo.classList.add('visible');
+      } else if (musicaTitulo) {
+        musicaTitulo.classList.remove('visible');
+      }
+
+      
+      // Animar título Fotos
+      const fotosTitulo = document.getElementById('fotos-titulo');
+      if (hash === '#FOTOS' && fotosTitulo) {
+        fotosTitulo.classList.add('visible');
+      } else if (fotosTitulo) {
+        fotosTitulo.classList.remove('visible');
+      }
+      
+      // Animar título Partituras
+      const partiturasTitulo = document.getElementById('partituras-titulo');
+      if (hash === '#PARTITURAS' && partiturasTitulo) {
+        setTimeout(() => {
+          partiturasTitulo.classList.add('visible');
+        }, 200);
+      } else if (partiturasTitulo) {
+        partiturasTitulo.classList.remove('visible');
+      }
+      
+      // Animar título Sobre mí
+      const sobreMiTitulo = document.getElementById('sobre-mi');
+      if (hash === '#QUIENSOY' && sobreMiTitulo) {
+        sobreMiTitulo.classList.add('visible');
+      } else if (sobreMiTitulo) {
+        sobreMiTitulo.classList.remove('visible');
       }
     }
     window.addEventListener('hashchange', mostrarSeccion);
     window.addEventListener('DOMContentLoaded', mostrarSeccion);
+    
+    // Lightbox functionality
+    let currentImageIndex = 0;
+    const imagesSrc = ['imagenes/Fotos4.jpg', 'imagenes/Fotos5.jpg', 'imagenes/Fotos6.jpg', 'imagenes/Fotos1.jpg', 'imagenes/Fotos2.jpg', 'imagenes/Fotos3.jpg'];
+    const downloadNames = ['Leo_Chaura_Foto4.jpg', 'Leo_Chaura_Foto5.jpg', 'Leo_Chaura_Foto6.jpg', 'Leo_Chaura_Foto1.jpg', 'Leo_Chaura_Foto2.jpg', 'Leo_Chaura_Foto3.jpg'];
+    
+    function updateLightboxImage() {
+      const lightboxImg = document.getElementById('lightbox-img');
+      const downloadBtn = document.getElementById('lightbox-download');
+      lightboxImg.src = imagesSrc[currentImageIndex];
+      downloadBtn.href = imagesSrc[currentImageIndex];
+      downloadBtn.download = downloadNames[currentImageIndex];
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const thumbnails = document.querySelectorAll('.foto-thumbnail');
+      const lightbox = document.getElementById('lightbox');
+      const closeBtn = document.querySelector('.lightbox-close');
+      
+      thumbnails.forEach(function(thumbnail, index) {
+        thumbnail.addEventListener('click', function() {
+          currentImageIndex = index;
+          lightbox.style.display = 'block';
+          updateLightboxImage();
+        });
+      });
+      
+      closeBtn.addEventListener('click', function() {
+        lightbox.style.display = 'none';
+      });
+      
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          lightbox.style.display = 'none';
+        }
+      });
+    });
+    
+    function nextImage() {
+      currentImageIndex = (currentImageIndex + 1) % imagesSrc.length;
+      updateLightboxImage();
+    }
+    
+    function prevImage() {
+      currentImageIndex = (currentImageIndex - 1 + imagesSrc.length) % imagesSrc.length;
+      updateLightboxImage();
+    }
   </script>
   
   <script>
@@ -392,6 +796,7 @@
         'nav-inicio': 'INICIO',
         'nav-quiensoy': 'QUIÉN SOY',
         'nav-musica': 'MÚSICA',
+        'nav-fotos': 'FOTOS',
         'nav-partituras': 'PARTITURAS',
         'subtitulo': 'Músico',
         'sobre-mi': 'Sobre mí',
@@ -408,6 +813,11 @@
         'bio-gestion4': 'A lo largo de su carrera, gestionó la participación en numerosos escenarios, festivales y milongas, estableciendo relaciones con espacios y productores. Además, co-gestionó una gira por Europa en 2023 para promocionar su música junto a Nahuel Conde por España, Francia, Suiza e Italia, trabajando en colaboración con una productora francesa para la logística y coordinación.',
         'bio-vuelo1': 'Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).',
         'bio-vuelo2': 'Se desempeña como guitarrista solista con su último EP, Con Vos, Guitarra (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.',
+        'fotos-titulo': 'Galería de Fotos',
+
+
+
+        'descargar': 'Descargar',
         'partituras-titulo': 'Descargá algunos de mis arreglos en PDF!',
         'cita-bartok': '"Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók',
         'contacto': 'CONTACTO',
@@ -419,6 +829,7 @@
         'nav-inicio': 'HOME',
         'nav-quiensoy': 'ABOUT ME',
         'nav-musica': 'MUSIC',
+        'nav-fotos': 'PHOTOS',
         'nav-partituras': 'SHEET MUSIC',
         'subtitulo': 'Musician',
         'sobre-mi': 'About me',
@@ -435,6 +846,11 @@
         'bio-gestion4': 'Throughout his career, he managed participation in numerous stages, festivals and milongas, establishing relationships with venues and producers. Additionally, he co-managed a European tour in 2023 to promote his music together with Nahuel Conde through Spain, France, Switzerland and Italy, working in collaboration with a French producer for logistics and coordination.',
         'bio-vuelo1': 'Currently, Leonardo records and produces new compositions, both instrumental and collaborative. His music has been presented in European countries and in various provinces of Argentina. He is in constant training and development, pursuing a specialization in Cultural Industries (UNTREF).',
         'bio-vuelo2': 'He performs as a solo guitarist with his latest EP, Con Vos, Guitarra (2024), and offers specialized classes and seminars on "Harmony Applied to Tango" and "Analysis and Stylistic Development of Guitar in Tango". His work as an accompanying musician, director and musical producer complements his artistic profile, demonstrating his versatility and passion for musical language in all its forms.',
+        'fotos-titulo': 'Photo Gallery',
+
+
+
+        'descargar': 'Download',
         'partituras-titulo': 'Download some of my arrangements in PDF!',
         'cita-bartok': '"Every art has the right to strike its roots in the art of a previous age; it not only has the right to do so, but it must spring from it." — Béla Bartók',
         'contacto': 'CONTACT',
@@ -460,6 +876,37 @@
       // Actualizar botones activos
       document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById('btn-' + lang).classList.add('active');
+    }
+    
+    function toggleNavbar() {
+      const menu = document.getElementById('navbar-menu');
+      menu.classList.toggle('show');
+    }
+    
+    function closeNavbar() {
+      const menu = document.getElementById('navbar-menu');
+      menu.classList.remove('show');
+    }
+    
+    function copyEmail() {
+      const email = 'leochauramusico@gmail.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = event.target.closest('button');
+        const originalTitle = btn.title;
+        btn.title = '¡Copiado!';
+        setTimeout(() => {
+          btn.title = originalTitle;
+        }, 2000);
+      }).catch(() => {
+        // Fallback para navegadores más antiguos
+        const textArea = document.createElement('textarea');
+        textArea.value = email;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        alert('Email copiado al portapapeles');
+      });
     }
   </script>
   

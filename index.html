@@ -270,8 +270,8 @@
       
       .navbar ul li a {
         display: block !important;
-        padding: 12px 20px !important;
-        font-size: 14px !important;
+        padding: 8px 16px !important;
+        font-size: 13px !important;
         color: #f5f5f5 !important;
         text-decoration: none !important;
         border: 1px solid #444 !important;
@@ -302,6 +302,18 @@
       .lang-btn {
         padding: 8px 12px !important;
         font-size: 12px !important;
+      }
+      
+      /* Responsive para sección de prensa */
+      .articles-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      .article {
+        margin: 0 10px !important;
+      }
+      .prensa-container {
+        padding: 0 10px !important;
       }
     }
     
@@ -413,6 +425,42 @@
       80% { transform: translateX(4px) scale(0.97); }
       100% { opacity: 1; transform: translateX(0) scale(1); }
     }
+    
+    /* Estilos para la sección de prensa detallada */
+    .prensa-container { max-width: 1200px; margin: 0 auto; }
+    .year-section { margin-bottom: 60px; }
+    .year-title { color: #d4af37; font-size: 2em; text-align: center; margin-bottom: 30px; }
+    .articles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+    .article { background: rgba(255,255,255,0.05); border-radius: 15px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .article:hover { transform: translateY(-5px); box-shadow: 0 12px 35px rgba(0,0,0,0.4); }
+    .article-header { height: 150px; display: flex; align-items: center; justify-content: center; color: white; text-align: center; padding: 20px; }
+    .article-content { padding: 25px; }
+    .article-title { color: #d4af37; font-size: 1.2em; margin-bottom: 10px; }
+    .article-excerpt { color: #ccc; margin-bottom: 15px; line-height: 1.5; }
+    .article-meta { display: flex; justify-content: space-between; align-items: center; }
+    .article-type { color: #888; font-size: 0.9em; }
+    .read-more { background: #d4af37; color: #000; padding: 8px 16px; border-radius: 20px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; }
+    .read-more:hover { background: #f4d03f; }
+    .country-icon { display: inline-block; width: 18px; height: 18px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+    .icon-argentina { background: linear-gradient(135deg, #74ACDF 50%, #ffffff 50%); }
+    .icon-francia { background: linear-gradient(90deg, #0055A4 33%, #ffffff 33%, #ffffff 66%, #EF4135 66%); }
+    .icon-italia { background: linear-gradient(90deg, #009246 33%, #ffffff 33%, #ffffff 66%, #CE2B37 66%); }
+    .icon-colombia { background: linear-gradient(180deg, #FCDD09 50%, #003893 50%, #CE1126 75%); }
+    .icon-internacional { background: radial-gradient(circle, #d4af37, #f4d03f); }
+    
+    /* Efecto para título Prensa */
+    .PRENSA .texto h2 {
+      opacity: 0;
+      transform: translateX(60px) scale(0.95);
+      transition: opacity 0.7s, transform 0.7s;
+      color: #d4af37;
+    }
+    
+    .PRENSA .texto h2.visible {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      animation: bounceInRight 0.7s;
+    }
   </style>
 
 </head>
@@ -428,6 +476,7 @@
       <li><a href="#QUIENSOY" data-translate="nav-quiensoy" onclick="closeNavbar()">QUIÉN SOY</a></li>
       <li><a href="#MUSICA" data-translate="nav-musica" onclick="closeNavbar()">MÚSICA</a></li>
       <li><a href="#FOTOS" data-translate="nav-fotos" onclick="closeNavbar()">FOTOS</a></li>
+      <li><a href="#PRENSA" data-translate="nav-prensa" onclick="closeNavbar()">PRENSA</a></li>
       <li><a href="#PARTITURAS" data-translate="nav-partituras" onclick="closeNavbar()">PARTITURAS</a></li>
     </ul>
   </nav>
@@ -674,11 +723,303 @@
     </div>
   </div>
 
+  <!-- PRENSA -->
+  <section class="PRENSA seccion" id="PRENSA" style="background: #000000; color: white; min-height: 100vh; padding: 80px 20px;">
+    <div class="prensa-container">
+      <div class="texto" style="text-align: center;">
+        <h2 id="prensa-titulo-main" data-translate="prensa-titulo">Prensa</h2>
+      </div>
+      <p style="text-align: center; color: #ccc; font-size: 1.1em; margin-bottom: 60px;" data-translate="prensa-subtitulo">(Algunas menciones destacadas)</p>
+      
+      <!-- 2025 -->
+      <div class="year-section">
+        <h2 class="year-title">2025</h2>
+        <div class="articles-grid" style="justify-content: center;">
+          
+          <div class="article argentina">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Página/12</h3>
+                <p><span class="country-icon icon-argentina"></span><span data-translate="pais-argentina">Argentina</span> - 2025</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Agenda Cultural</h4>
+              <p class="article-excerpt">Destacado en la agenda cultural del reconocido diario argentino...</p>
+              <div class="article-meta">
+                <span class="article-type">Agenda</span>
+                <a href="https://www.pagina12.com.ar/571880-agenda" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article argentina">
+            <div class="article-header" style="background-image: url('imagenes/Radio.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Radio Moreno</h3>
+                <p><span class="country-icon icon-argentina"></span>Municipio de Moreno - 2025</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Cobertura Radial</h4>
+              <p class="article-excerpt">Entrevista y cobertura en la radio oficial del Municipio de Moreno...</p>
+              <div class="article-meta">
+                <span class="article-type">Radio</span>
+                <a href="https://moreno2.moreno.gob.ar/radio-noticia.php?id=6071" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- 2024 -->
+      <div class="year-section">
+        <h2 class="year-title">2024</h2>
+        <div class="articles-grid">
+          
+          <div class="article argentina">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Ahora Calafate</h3>
+                <p><span class="country-icon icon-argentina"></span><span data-translate="pais-argentina">Argentina</span> - 2024</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Tango de Película</h4>
+              <p class="article-excerpt">Mariela Sabio lanzó su tercer álbum con la participación de Leo Chaura...</p>
+              <div class="article-meta">
+                <span class="article-type">Reseña</span>
+                <a href="https://ahoracalafate.com.ar/amp/21221/tango-de-pelicula-mariela-sabio-lanzo-su-tercer-album" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article argentina">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Clarín</h3>
+                <p><span class="country-icon icon-argentina"></span><span data-translate="pais-argentina">Argentina</span> - 2024</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Agenda Cultural GBA</h4>
+              <p class="article-excerpt">Destacado en la agenda de fin de semana del Gran Buenos Aires...</p>
+              <div class="article-meta">
+                <span class="article-type">Agenda</span>
+                <a href="https://www.clarin.com/zonales/bandas-rock-teatro-charlas-maraton-destacados-fin-semana-gba_0_AjBdrHaFO.html" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article argentina">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Fervor</h3>
+                <p><span class="country-icon icon-argentina"></span><span data-translate="pais-argentina">Argentina</span> - 2024</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Noche de Tango en Avellaneda</h4>
+              <p class="article-excerpt">Actuación destacada en Avellaneda junto a reconocidos artistas...</p>
+              <div class="article-meta">
+                <span class="article-type">Evento</span>
+                <a href="https://fervor.com.ar/nahuel-conde-y-marina-cavalletti-actuaran-en-avellaneda/?amp=1" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- 2023 -->
+      <div class="year-section">
+        <h2 class="year-title">2023</h2>
+        <div class="articles-grid">
+          
+          <div class="article francia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Sillon LZ</h3>
+                <p><span class="country-icon icon-francia"></span><span data-translate="pais-francia">Francia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Duo Argentin Conde - Chaura</h4>
+              <p class="article-excerpt">Concierto del dúo argentino en Francia durante la gira europea...</p>
+              <div class="article-meta">
+                <span class="article-type">Concierto</span>
+                <a href="https://www.sillonlz.fr/event/concert-du-duo-argentin-conde-chaura/" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article italia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Faitango</h3>
+                <p><span class="country-icon icon-italia"></span>Torino, <span data-translate="pais-italia">Italia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Il Tango del mercoledì a Torino</h4>
+              <p class="article-excerpt">Presentación en vivo del dúo en el prestigioso evento de tango en Torino...</p>
+              <div class="article-meta">
+                <span class="article-type">Evento</span>
+                <a href="https://www.faitango.it/scheda-evento-116170/tangando-il-tango-del-mercoledi-a-torino-tdj-silvia-musica-live-con-il-duo-conde-chaura" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article francia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>DNA Alsace</h3>
+                <p><span class="country-icon icon-francia"></span><span data-translate="pais-francia">Francia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Milongas et Séminaires</h4>
+              <p class="article-excerpt">Cobertura de milongas y seminarios para amateurs de tango en Alsacia...</p>
+              <div class="article-meta">
+                <span class="article-type">Artículo</span>
+                <a href="https://www.dna.fr/culture-loisirs/2023/09/28/milongas-et-seminaires-attendent-les-amateurs-de-tango" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article francia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Domaine de la Chouette</h3>
+                <p><span class="country-icon icon-francia"></span><span data-translate="pais-francia">Francia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Concerts d'Automne</h4>
+              <p class="article-excerpt">Presentación en el prestigioso festival de conciertos de otoño...</p>
+              <div class="article-meta">
+                <span class="article-type">Concierto</span>
+                <a href="https://domainedelachouette.org/concerts-dautomne/" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article francia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Milonga au Gramophone</h3>
+                <p><span class="country-icon icon-francia"></span>París, <span data-translate="pais-francia">Francia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Milonga Dominical</h4>
+              <p class="article-excerpt">Participación en la reconocida milonga parisina...</p>
+              <div class="article-meta">
+                <span class="article-type">Milonga</span>
+                <a href="https://www.parilongas.fr/index/dimanchesunday#h.55ydit4rrzde" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article francia">
+            <div class="article-header" style="background-image: url('imagenes/Evento.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Méli-Mélo Tango</h3>
+                <p><span class="country-icon icon-francia"></span><span data-translate="pais-francia">Francia</span> - 2023</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Concert Live</h4>
+              <p class="article-excerpt">Participación en el evento de tango francés que reúne a artistas internacionales...</p>
+              <div class="article-meta">
+                <span class="article-type">Evento</span>
+                <a href="https://www.parilongas.fr/index/dimanchesunday#h.w9ku01fg1pe2" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Años anteriores -->
+      <div class="year-section">
+        <h2 class="year-title">2018 - 2022</h2>
+        <div class="articles-grid">
+          
+          <div class="article colombia">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Alcaldía de Cali</h3>
+                <p><span class="country-icon icon-colombia"></span><span data-translate="pais-colombia">Colombia</span> - 2022</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Tango Premium</h4>
+              <p class="article-excerpt">Presentación en el Teatro del Presagio con apoyo oficial de la Alcaldía...</p>
+              <div class="article-meta">
+                <span class="article-type">Evento</span>
+                <a href="https://www.cali.gov.co/cultura/publicaciones/137638/este-viernes-disfruta-de-tango-premium-en-el-teatro-del-presagio/" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article colombia">
+            <div class="article-header" style="background-image: url('imagenes/Diario.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Crónica del Quindío</h3>
+                <p><span class="country-icon icon-colombia"></span><span data-translate="pais-colombia">Colombia</span> - 2018</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Tangos Memorables</h4>
+              <p class="article-excerpt">Un amor a primera vista - Cobertura de la escena tanguera colombiana...</p>
+              <div class="article-meta">
+                <span class="article-type">Artículo</span>
+                <a href="https://www.archivo.cronicadelquindio.com/noticias/por-ejemplo/andrea-eletti-y-el-tango-un-amor-a-primera-vista-1" target="_blank" class="read-more" data-translate="leer-mas">Leer más</a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="article internacional">
+            <div class="article-header" style="background-image: url('imagenes/Perfil.jpg'); background-size: cover; background-position: center; position: relative;">
+              <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 10px;">
+                <h3>Viberate</h3>
+                <p><span class="country-icon icon-internacional"></span>Plataforma Internacional</p>
+              </div>
+            </div>
+            <div class="article-content">
+              <h4 class="article-title">Perfil de Artista</h4>
+              <p class="article-excerpt">Perfil oficial en la plataforma internacional de análisis musical...</p>
+              <div class="article-meta">
+                <span class="article-type">Perfil</span>
+                <a href="https://www.viberate.com/artist/leo-chaura-313/" target="_blank" class="read-more" data-translate="ver-perfil">Ver perfil</a>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+      <!-- Sección de contacto para prensa -->
+      <div style="text-align: center; margin-top: 80px; padding: 40px; background: rgba(212, 175, 55, 0.1); border-radius: 15px; border: 1px solid rgba(212, 175, 55, 0.3);">
+        <h3 style="color: #d4af37; margin: 0 0 15px 0; font-size: 1.5em;" data-translate="contacto-prensa">Contacto para Prensa</h3>
+        <p style="color: #ccc; margin: 0 0 20px 0; line-height: 1.6;" data-translate="contacto-prensa-texto">Para entrevistas, reseñas o información adicional, no dudes en contactarme</p>
+        <a href="mailto:leochauramusico@gmail.com" style="background: #d4af37; color: #000; padding: 12px 24px; border-radius: 25px; text-decoration: none; font-weight: 500; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 8px;" onmouseover="this.style.background='#f4d03f'" onmouseout="this.style.background='#d4af37'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+          <span data-translate="enviar-email">Enviar Email</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- PARTITURAS -->
   <section class="PARTITURAS seccion" id="PARTITURAS" style="background-image: url('imagenes/fondopartituras.jpg'); background-size: cover; background-position: center; background-attachment: fixed; min-height: 100vh;">
     <div class="contenido">
       <div class="texto">
-        <h2 id="partituras-titulo" data-translate="partituras-titulo" style="padding-top: 2cm; text-align: center;">Descargá algunos de mis arreglos en PDF!</h2>
+        <h2 id="partituras-titulo" data-translate="partituras-titulo" style="padding-top: 2cm;">Descargá algunos de mis arreglos en PDF!</h2>
       </div>
     </div>
     <div class="contenido" style="padding-top: 3cm;">
@@ -719,6 +1060,14 @@
         fotosTitulo.classList.add('visible');
       } else if (fotosTitulo) {
         fotosTitulo.classList.remove('visible');
+      }
+      
+      // Animar título Prensa
+      const prensaTitulo = document.getElementById('prensa-titulo-main');
+      if (hash === '#PRENSA' && prensaTitulo) {
+        prensaTitulo.classList.add('visible');
+      } else if (prensaTitulo) {
+        prensaTitulo.classList.remove('visible');
       }
       
       // Animar título Partituras
@@ -797,6 +1146,7 @@
         'nav-quiensoy': 'QUIÉN SOY',
         'nav-musica': 'MÚSICA',
         'nav-fotos': 'FOTOS',
+        'nav-prensa': 'PRENSA',
         'nav-partituras': 'PARTITURAS',
         'subtitulo': 'Músico',
         'sobre-mi': 'Sobre mí',
@@ -814,9 +1164,17 @@
         'bio-vuelo1': 'Actualmente, Leonardo graba y produce nuevas composiciones, tanto instrumentales como colaborativas. Su música ha sido presentada en países de Europa y en diversas provincias de Argentina. Se encuentra en constante capacitación y desarrollo, cursando una especialización en Industrias Culturales (UNTREF).',
         'bio-vuelo2': 'Se desempeña como guitarrista solista con su último EP, Con Vos, Guitarra (2024), y ofrece clases y seminarios especializados en "Armonía aplicada al Tango" y "Análisis y Desarrollo Estilístico de la Guitarra en el Tango". Su trabajo como músico acompañante, director y productor musical complementa su perfil artístico, demostrando su versatilidad y pasión por el lenguaje musical en todas sus formas.',
         'fotos-titulo': 'Galería de Fotos',
-
-
-
+        'prensa-titulo': 'Prensa',
+        'prensa-subtitulo': 'Artículos, entrevistas y reseñas sobre mi música',
+        'leer-mas': 'Leer más',
+        'ver-perfil': 'Ver perfil',
+        'pais-argentina': 'Argentina',
+        'pais-francia': 'Francia',
+        'pais-italia': 'Italia',
+        'pais-colombia': 'Colombia',
+        'contacto-prensa': 'Contacto para Prensa',
+        'contacto-prensa-texto': 'Para entrevistas, reseñas o información adicional, no dudes en contactarme',
+        'enviar-email': 'Enviar Email',
         'descargar': 'Descargar',
         'partituras-titulo': 'Descargá algunos de mis arreglos en PDF!',
         'cita-bartok': '"Todo arte tiene el derecho de hincar sus raíces en el arte de una era anterior; no sólo tiene derecho a hacerlo, sino que debe arrancar de él." — Béla Bartók',
@@ -830,6 +1188,7 @@
         'nav-quiensoy': 'ABOUT ME',
         'nav-musica': 'MUSIC',
         'nav-fotos': 'PHOTOS',
+        'nav-prensa': 'PRESS',
         'nav-partituras': 'SHEET MUSIC',
         'subtitulo': 'Musician',
         'sobre-mi': 'About me',
@@ -847,9 +1206,17 @@
         'bio-vuelo1': 'Currently, Leonardo records and produces new compositions, both instrumental and collaborative. His music has been presented in European countries and in various provinces of Argentina. He is in constant training and development, pursuing a specialization in Cultural Industries (UNTREF).',
         'bio-vuelo2': 'He performs as a solo guitarist with his latest EP, Con Vos, Guitarra (2024), and offers specialized classes and seminars on "Harmony Applied to Tango" and "Analysis and Stylistic Development of Guitar in Tango". His work as an accompanying musician, director and musical producer complements his artistic profile, demonstrating his versatility and passion for musical language in all its forms.',
         'fotos-titulo': 'Photo Gallery',
-
-
-
+        'prensa-titulo': 'Press',
+        'prensa-subtitulo': 'Articles, interviews and reviews about my music',
+        'leer-mas': 'Read more',
+        'ver-perfil': 'View profile',
+        'pais-argentina': 'Argentina',
+        'pais-francia': 'France',
+        'pais-italia': 'Italy',
+        'pais-colombia': 'Colombia',
+        'contacto-prensa': 'Press Contact',
+        'contacto-prensa-texto': 'For interviews, reviews or additional information, feel free to contact me',
+        'enviar-email': 'Send Email',
         'descargar': 'Download',
         'partituras-titulo': 'Download some of my arrangements in PDF!',
         'cita-bartok': '"Every art has the right to strike its roots in the art of a previous age; it not only has the right to do so, but it must spring from it." — Béla Bartók',
